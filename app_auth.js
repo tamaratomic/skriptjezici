@@ -15,7 +15,7 @@ var corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
-
+/*
 app.post('/register', (req, res) => {
 
     const obj = {
@@ -39,17 +39,17 @@ app.post('/register', (req, res) => {
         res.json({ token: token });
 
     }).catch( err => res.status(500).json(err) );
-});
+});*/
 
 app.post('/login', (req, res) => {
 
     Users.findOne({ where: { name: req.body.name } })
-        .then( usr => {
+        .then( user => {
 
-            if (bcrypt.compareSync(req.body.password, usr.password)) {
+            if (bcrypt.compareSync(req.body.sifra, user.sifra)) {
                 const obj = {
-                    userId: usr.id,
-                    user: usr.name
+                    userId: user.id,
+                    user: user.username
                 };
         
                 const token = jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET);

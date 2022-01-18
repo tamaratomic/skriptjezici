@@ -1,13 +1,12 @@
 const express = require('express');
-const { sequelize } = require('./models');
-const msgs = require('./routes/messages');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const { sequelize } = require('./models');
 
 const app = express();
 
-app.use('/api', msgs);
+
 
 function getCookies(req) {
     if (req.headers.cookie == null) return {};
@@ -57,4 +56,5 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 app.listen({ port: 8000 }, async () => {
     await sequelize.authenticate();
+    console.log("radiiiim")
 });
