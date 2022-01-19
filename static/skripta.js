@@ -17,7 +17,7 @@ function init() {
             });
         });
 
-    fetch('http://127.0.0.1:8000/api/messages', {
+    fetch('http://127.0.0.1:9000/api/messages', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -34,6 +34,7 @@ function init() {
     document.getElementById('msgBtn').addEventListener('click', e => {
         e.preventDefault();
 
+        
         const data = {
             body: document.getElementById('body').value
         };

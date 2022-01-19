@@ -39,22 +39,28 @@ function authToken(req, res, next) {
 }
 
 
-app.get('/register', (req, res) => {
-    res.sendFile('register.html', { root: './static' });
-});
+
 
 app.get('/login', (req, res) => {
     res.sendFile('login.html', { root: './static' });
 });
 
-app.get('/', authToken, (req, res) => {
-    res.sendFile('index.html', { root: './static' });
+app.get('/admin', (req, res) => {
+    res.sendFile('admin.html', { root: './static' });
 });
 
+app.get('/studenti', (req, res) => {
+    res.sendFile('studenti.html', { root: './static' });
+});
 
-app.use(express.static(path.join(__dirname, 'static')));
+/*
+app.get('/', authToken, (req, res) => {
+    res.sendFile('index.html', { root: './static' });
+});*/
+
+app.use("/static", express.static('./static/'))
+//app.use(express.static(path.join(__dirname, 'static')));
 
 app.listen({ port: 8000 }, async () => {
     await sequelize.authenticate();
-    console.log("radiiiim")
 });

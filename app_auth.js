@@ -1,8 +1,9 @@
 const express = require('express');
-const { sequelize, Users } = require('./models');
+const { sequelize, User } = require('./models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const { use } = require('bcrypt/promises');
 require('dotenv').config();
 
 const app = express();
@@ -42,16 +43,21 @@ app.post('/register', (req, res) => {
 });*/
 
 app.post('/login', (req, res) => {
-
-    Users.findOne({ where: { name: req.body.name } })
+    console.log("Logujem se " + req.body.email);
+    User.findOne({ where: { email: req.body.email } })
         .then( user => {
+            console.log("u useru");
 
             if (bcrypt.compareSync(req.body.sifra, user.sifra)) {
                 const obj = {
                     userId: user.id,
-                    user: user.username
+                    username: user.username,
+                    email: user.email,
+                    sifra: user.sifra,
+                    admin: user.admin,
+                    moderator: user.moderator
                 };
-        
+                console.log(obj);
                 const token = jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET);
                 
                 res.json({ token: token });

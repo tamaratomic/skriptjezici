@@ -26,7 +26,9 @@ app.use('/admin/predmet', predmeti);
 app.use('/admin/profesor', profesori);
 app.use('/admin/asistent', asistenti);
 app.use('/admin/student', studenti);
+app.use('/admin/user', users);
 
-app.listen({ port: 9000 }, async () => {
+
+app.listen({ port: 8001 }, async () => {
     await sequelize.authenticate();
 });

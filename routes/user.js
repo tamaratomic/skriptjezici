@@ -22,6 +22,7 @@ route.get('/:id', (req, res) => {
 route.post('/', (req, res) => {
     validateUser.validateAsync(req.body).then(obj => {
         obj = req.body;
+        console.log(obj);
         User.create(obj).then(row =>{
             console.log("User je kreiran");
             res.json(row);
