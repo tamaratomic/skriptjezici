@@ -46,22 +46,24 @@ app.post('/login', (req, res) => {
     console.log("Logujem se " + req.body.email);
     User.findOne({ where: { email: req.body.email } })
         .then( user => {
-            console.log("u useru");
-
+            console.log(user);
+            console.log(bcrypt.compareSync(req.body.sifra, user.sifra));
             if (bcrypt.compareSync(req.body.sifra, user.sifra)) {
+                console.log("u ifuuu");
                 const obj = {
                     userId: user.id,
-                    username: user.username,
+                  //  username: user.username,
                     email: user.email,
-                    sifra: user.sifra,
-                    admin: user.admin,
-                    moderator: user.moderator
+                    // sifra: user.sifra,
+                    // admin: user.admin,
+                    // moderator: user.moderator
                 };
                 console.log(obj);
                 const token = jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET);
                 
                 res.json({ token: token });
             } else {
+                console.log("u elsu");
                 res.status(400).json({ msg: "Invalid credentials"});
             }
         })
