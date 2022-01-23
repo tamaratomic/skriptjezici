@@ -9,8 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({Asistent, Profesor}) {
       // define association here
+      // this.belongsTo(Profesor, {foreignKey: profesorId, as: 'profesor' });
+      // this.belongsTo(Asistent, {foreignKey: asistentdI, as: 'profesor' })
     }
   };
   Predmet.init({

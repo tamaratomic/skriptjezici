@@ -53,12 +53,31 @@ app.get('/studenti', (req, res) => {
     res.sendFile('studenti.html', { root: './static' });
 });
 
+app.get('/predmeti', (req, res) => {
+    res.sendFile('predmeti.html', { root: './static' });
+});
+
+app.get('/profesori', (req, res) => {
+    res.sendFile('profesori.html', { root: './static' });
+});
+
+app.get('/asistenti', (req, res) => {
+    res.sendFile('asistenti.html', { root: './static' });
+});
+
+
+
 /*
 app.get('/', authToken, (req, res) => {
     res.sendFile('index.html', { root: './static' });
 });*/
 
-app.use("/static", express.static('./static/'))
+
+
+
+app.use(express.static(path.join(__dirname, 'static')));
+
+app.use("/static", express.static('./static/'));
 //app.use(express.static(path.join(__dirname, 'static')));
 
 app.listen({ port: 8000 }, async () => {
